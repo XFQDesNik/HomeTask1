@@ -2,17 +2,14 @@ package ru.digitos;
 
 public class DebitAccount extends BankAccount{
 
-    @Override
-    double withdraw(double amount) {
-        if (getBalance()>=amount){
-            setBalance(getBalance()-amount);
-            return amount;
-        }
-        else return 0;
+    public DebitAccount(String aHolder) {
+        super(aHolder);
     }
 
     @Override
-    double deposit(double amount) {
-        return 0;
+    void withdraw(double amount) {
+        if (getBalance()>=amount){
+            setBalance(getBalance()-amount);
+        }
     }
 }
