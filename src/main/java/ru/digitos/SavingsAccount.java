@@ -1,8 +1,9 @@
 package ru.digitos;
+
 import java.time.ZoneId;
 import java.util.Date;
 
-public class SavingsAccount extends BankAccount implements InterestBearing{
+public class SavingsAccount extends BankAccount implements InterestBearing {
     public SavingsAccount(String aHolder) {
         super(aHolder);
     }
@@ -14,7 +15,7 @@ public class SavingsAccount extends BankAccount implements InterestBearing{
         int dayOfMonth = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate().getDayOfMonth();
 
         if (getBalance() > 0 && dayOfMonth == 1)
-           setBalance(getBalance()+getBalance()*percent/100 );
+            setBalance(getBalance() + getBalance() * percent / 100);
     }
 
     @Override

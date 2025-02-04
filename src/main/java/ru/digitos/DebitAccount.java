@@ -1,6 +1,6 @@
 package ru.digitos;
 
-public class DebitAccount extends BankAccount{
+public class DebitAccount extends BankAccount implements TransactionValidator {
 
     public DebitAccount(String aHolder) {
         super(aHolder);
@@ -8,8 +8,13 @@ public class DebitAccount extends BankAccount{
 
     @Override
     void withdraw(double amount) {
-        if (getBalance()>=amount){
-            setBalance(getBalance()-amount);
+        if (getBalance() >= amount && validate(amount)) {
+            setBalance(getBalance() - amount);
         }
+    }
+
+    @Override
+    public boolean validate(double amount) {
+        return amount > 10000 ? false : true;
     }
 }

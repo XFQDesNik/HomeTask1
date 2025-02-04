@@ -1,6 +1,6 @@
 package ru.digitos;
 
-public class CreditAccount extends BankAccount implements TransactionFee{
+public class CreditAccount extends BankAccount implements TransactionFee, TransactionValidator {
 
 
     public CreditAccount(String aHolder) {
@@ -10,9 +10,8 @@ public class CreditAccount extends BankAccount implements TransactionFee{
     @Override
     void withdraw(double amount) {
         double creditLimit = -5000;
-        if (getBalance()-amount >= creditLimit)
-        {
-            setBalance(getBalance()-amount);
+        if (getBalance() - amount >= creditLimit && validate(amount)) {
+            setBalance(getBalance() - amount);
             applyFee(amount);
         }
     }
@@ -20,6 +19,11 @@ public class CreditAccount extends BankAccount implements TransactionFee{
     @Override
     public void applyFee(double amount) {
         double commission = 1;
-        setBalance(getBalance()-(amount * commission/100));
+        setBalance(getBalance() - (amount * commission / 100));
+    }
+
+    @Override
+    public boolean validate(double amount) {
+        return amount > 5000 ? false : true;
     }
 }
