@@ -1,28 +1,34 @@
 package ru.digitos;
 
-public abstract class BankAccount extends TransactionProcessor {
+import java.math.BigDecimal;
+
+public abstract class BankAccount {
     private int accountNumber;
-    private double balance;
+    private BigDecimal balance;
     private String accountHolder;
+    private int count = 1;
 
-    abstract void withdraw(double amount);
+    abstract void withdraw(BigDecimal amount);
 
-    void deposit(double amount) {
-        balance = balance + amount;
+    public void deposit(BigDecimal amount){
+        balance = balance.add(amount);
     }
 
-    public double getBalance() {
+    public BigDecimal getBalance(){
         return balance;
     }
 
-    public void setBalance(double amount) {
-        this.balance = amount;
+    public int getAccountNumber(){
+        return accountNumber;
+    }
+
+    public String getAccountHolder(){
+        return accountHolder;
     }
 
     public BankAccount(String aHolder) {
-        ++accountNumber;
+        accountNumber = count++;
         accountHolder = aHolder;
-        balance = 0;
+        balance = BigDecimal.valueOf(0.0);
     }
-
 }

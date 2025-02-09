@@ -1,5 +1,7 @@
 package ru.digitos;
 
+import java.math.BigDecimal;
+
 public interface TransactionValidator {
-    boolean validate(double amount);
+    boolean validate(BigDecimal amount);
 }

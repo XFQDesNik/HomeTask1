@@ -1,20 +1,20 @@
 package ru.digitos;
 
-public class DebitAccount extends BankAccount implements TransactionValidator {
+import java.math.BigDecimal;
 
+public class DebitAccount extends BankAccount  implements TransactionValidator{
+    @Override
+    void withdraw(BigDecimal amount) {
+        if (getBalance().compareTo(amount) > 0 || getBalance().compareTo(amount) == 0){
+            deposit(getBalance().subtract(amount));
+        }
+    }
     public DebitAccount(String aHolder) {
         super(aHolder);
     }
 
     @Override
-    void withdraw(double amount) {
-        if (getBalance() >= amount && validate(amount)) {
-            setBalance(getBalance() - amount);
-        }
-    }
-
-    @Override
-    public boolean validate(double amount) {
-        return amount > 10000 ? false : true;
+    public boolean validate(BigDecimal amount) {
+        return amount.compareTo(BigDecimal.valueOf(10000)) <= 0;
     }
 }

@@ -1,5 +1,7 @@
 package ru.digitos;
 
+import java.math.BigDecimal;
+
 public interface TransactionFee {
-    void applyFee(double amount);
+    public void applyFee(BigDecimal amount);
 }
