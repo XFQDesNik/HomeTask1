@@ -5,17 +5,22 @@ import java.math.BigDecimal;
 public class CreditAccount extends BankAccount implements TransactionFee, TransactionValidator {
     @Override
     void withdraw(BigDecimal amount) {
-        BigDecimal creditLimit = BigDecimal.valueOf(-5000);
-        if (getBalance().add(creditLimit).compareTo(amount) > 0 || getBalance().add(creditLimit).compareTo(amount) == 0){
-            deposit(getBalance().subtract(amount));
+        BigDecimal creditLimit = BigDecimal.valueOf(5000);
+        if (validate(amount) && amount.compareTo(BigDecimal.valueOf(0)) > 0) {
+            if (getBalance().add(creditLimit).compareTo(amount) >= 0) {
+                BigDecimal balance = getBalance().subtract(amount);
+                applyFee(amount);
+                setBalance(balance);
+            }
         }
     }
 
     @Override
     public void applyFee(BigDecimal amount) {
         double commission = 1.0;
-        deposit(getBalance().multiply(amount.add(amount.multiply(BigDecimal.valueOf(commission)))));
+        setBalance(getBalance().multiply(amount.add(amount.multiply(BigDecimal.valueOf(commission / 100)))));
     }
+
     public CreditAccount(String aHolder) {
         super(aHolder);
     }

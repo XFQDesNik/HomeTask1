@@ -5,8 +5,10 @@ import java.math.BigDecimal;
 public class DebitAccount extends BankAccount  implements TransactionValidator{
     @Override
     void withdraw(BigDecimal amount) {
-        if (getBalance().compareTo(amount) > 0 || getBalance().compareTo(amount) == 0){
-            deposit(getBalance().subtract(amount));
+        if (validate(amount)) {
+            if (getBalance().compareTo(amount) >= 0) {
+                setBalance(getBalance().subtract(amount));
+            }
         }
     }
     public DebitAccount(String aHolder) {

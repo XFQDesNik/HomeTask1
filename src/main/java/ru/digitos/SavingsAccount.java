@@ -17,7 +17,9 @@ public class SavingsAccount extends BankAccount implements InterestBearing{
 
     @Override
     void withdraw(BigDecimal amount) {
-
+        if (getBalance().compareTo(amount) > 0 || getBalance().compareTo(amount) == 0 ) {
+            setBalance(getBalance().subtract(amount));
+        }
     }
     public SavingsAccount(String aHolder) {
         super(aHolder);

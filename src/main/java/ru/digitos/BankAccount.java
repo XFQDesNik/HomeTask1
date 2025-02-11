@@ -6,7 +6,7 @@ public abstract class BankAccount {
     private int accountNumber;
     private BigDecimal balance;
     private String accountHolder;
-    private int count = 1;
+    private static int count = 1;
 
     abstract void withdraw(BigDecimal amount);
 
@@ -16,6 +16,10 @@ public abstract class BankAccount {
 
     public BigDecimal getBalance(){
         return balance;
+    }
+
+    public void setBalance(BigDecimal amount){
+        balance = amount;
     }
 
     public int getAccountNumber(){
